@@ -25,21 +25,35 @@
     <p class="form-intro">Enter your name and roll number to view your result.</p>
 
     <form id="searchForm">
+      <label for="board">Board</label>
+      <select id="board" name="board" required>
+        <option value="" selected disabled>Select board</option>
+        <option value="BSEB">BSEB</option>
+        <option value="CBSE">CBSE</option>
+      </select>
+
       <label for="studentClass">Class</label>
       <select id="studentClass" name="class" required>
         <option value="" selected disabled>Select class</option>
-        <option value="1">Class 1</option>
-        <option value="2">Class 2</option>
-        <option value="3">Class 3</option>
-        <option value="4">Class 4</option>
-        <option value="5">Class 5</option>
-        <option value="6">Class 6</option>
-        <option value="7">Class 7</option>
-        <option value="8">Class 8</option>
-        <option value="9">Class 9</option>
-        <option value="10">Class 10</option>
-        <option value="11">Class 11</option>
-        <option value="12">Class 12</option>
+      </select>
+
+      <label for="subject">Subject</label>
+      <select id="subject" name="subject" required>
+        <option value="" selected disabled>Select subject</option>
+        <option value="Biology">Biology</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="Physics">Physics</option>
+      </select>
+
+      <label for="chapter">Chapter name</label>
+      <select id="chapter" name="chapter" required>
+        <option value="" selected disabled>Select chapter</option>
+        <option value="CROP PRODUCTION AND MANAGEMENT">CROP PRODUCTION AND MANAGEMENT</option>
+        <option value="THE FUNDAMENTAL UNIT OF LIFE">THE FUNDAMENTAL UNIT OF LIFE</option>
+        <option value="LIFE PROCESSES">LIFE PROCESSES</option>
+        <option value="THE UNIT OF LIFE">THE UNIT OF LIFE</option>
+        <option value="REPRODUCTION IN ORGANISMS">REPRODUCTION IN ORGANISMS</option>
+        <option value="CHEMICAL REACTIONS AND EQUATIONS">CHEMICAL REACTIONS AND EQUATIONS</option>
       </select>
 
       <label for="name">Student name</label>

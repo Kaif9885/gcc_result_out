@@ -35,23 +35,38 @@
         <option value="Md Reyaj">Md Reyaj</option>
         <option value="Nisha Kumari">Nisha Kumari</option>
         <option value="Nargis Bano">Nargis Bano</option>
+        <option value="Er. Faiz">Er. Faiz</option>
+      </select>
+
+      <label for="teacherBoard">Board</label>
+      <select id="teacherBoard" name="board" required>
+        <option value="" selected disabled>Select board</option>
+        <option value="BSEB">BSEB</option>
+        <option value="CBSE">CBSE</option>
       </select>
 
       <label for="teacherClass">Class records to view</label>
       <select id="teacherClass" name="class" required>
         <option value="" selected disabled>Select class</option>
-        <option value="1">Class 1</option>
-        <option value="2">Class 2</option>
-        <option value="3">Class 3</option>
-        <option value="4">Class 4</option>
-        <option value="5">Class 5</option>
-        <option value="6">Class 6</option>
-        <option value="7">Class 7</option>
-        <option value="8">Class 8</option>
-        <option value="9">Class 9</option>
-        <option value="10">Class 10</option>
-        <option value="11">Class 11</option>
-        <option value="12">Class 12</option>
+      </select>
+
+      <label for="teacherSubject">Subject</label>
+      <select id="teacherSubject" name="subject" required>
+        <option value="" selected disabled>Select subject</option>
+        <option value="Biology">Biology</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="Physics">Physics</option>
+      </select>
+
+      <label for="teacherChapter">Chapter name</label>
+      <select id="teacherChapter" name="chapter" required>
+        <option value="" selected disabled>Select chapter</option>
+        <option value="CROP PRODUCTION AND MANAGEMENT">CROP PRODUCTION AND MANAGEMENT</option>
+        <option value="THE FUNDAMENTAL UNIT OF LIFE">THE FUNDAMENTAL UNIT OF LIFE</option>
+        <option value="LIFE PROCESSES">LIFE PROCESSES</option>
+        <option value="THE UNIT OF LIFE">THE UNIT OF LIFE</option>
+        <option value="REPRODUCTION IN ORGANISMS">REPRODUCTION IN ORGANISMS</option>
+        <option value="CHEMICAL REACTIONS AND EQUATIONS">CHEMICAL REACTIONS AND EQUATIONS</option>
       </select>
 
       <label for="teacherPassword">Teacher password</label>
@@ -69,6 +84,7 @@
       <p id="studentCount" class="teacher-note"></p>
       <section class="teacher-top-results" aria-labelledby="teacherTopTitle">
         <h2 id="teacherTopTitle">TOP 3 STUDENTS</h2>
+        <p id="teacherTopCount" class="teacher-note" hidden></p>
         <div class="teacher-table-wrap">
           <table class="result-table teacher-table teacher-top-table">
             <thead>

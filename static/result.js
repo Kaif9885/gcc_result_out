@@ -3,12 +3,17 @@ const resultError = document.getElementById("resultError");
 const topResultsRows = document.getElementById("topResultsRows");
 const topResultsError = document.getElementById("topResultsError");
 const resultClass = document.getElementById("resultClass");
+const resultDetails = document.getElementById("resultDetails");
 const storedResult = sessionStorage.getItem("studentResult");
 
 if (storedResult) {
   try {
     const student = JSON.parse(storedResult);
-    resultClass.textContent = `CLASS ${student.student_class}`;
+    const sectionLabel = student.class_section ? ` ${student.class_section.toUpperCase()}` : "";
+    resultClass.textContent = `CLASS - ${student.student_class}${sectionLabel}`;
+    resultDetails.textContent = [student.board, student.subject, student.chapter]
+      .filter(Boolean)
+      .join(" · ");
     for (const value of [
       student.roll,
       student.name,
@@ -40,19 +45,24 @@ async function loadTopResults() {
   try {
     const student = JSON.parse(storedResult);
     const params = new URLSearchParams({ class: student.student_class });
+    if (student.board) params.set("board", student.board);
+    if (student.subject) params.set("subject", student.subject);
+    if (student.chapter) params.set("chapter", student.chapter);
+    if (student.class_section) params.set("section", student.class_section);
     const response = await fetch(`/api/top-students?${params}`);
     if (!response.ok) {
       throw new Error(`Request failed with status ${response.status}`);
     }
 
     const students = await response.json();
-    for (const student of students) {
+    document.getElementById("topResultsTitle").textContent = "TOP - 3 RESULTS";
+    for (const topStudent of students) {
       const row = document.createElement("tr");
       for (const value of [
-        positionLabel(student.position),
-        student.name,
-        student.total_marks,
-        student.marks,
+        positionLabel(topStudent.position),
+        topStudent.name,
+        topStudent.total_marks,
+        topStudent.marks,
       ]) {
         const cell = document.createElement("td");
         cell.textContent = value ?? "";

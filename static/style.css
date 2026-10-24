@@ -5,7 +5,7 @@ body {
   background: #f3f4f6;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: safe center;
   min-height: 100vh;
   margin: 0;
   padding: 24px;
@@ -369,6 +369,16 @@ button:disabled { cursor: wait; opacity: 0.7; }
 
 .result-heading .result-subtitle {
   font-size: clamp(15px, 2vw, 20px);
+}
+
+.result-heading .result-details {
+  max-width: 720px;
+  margin: 8px auto 0;
+  color: #374151;
+  font-size: clamp(13px, 1.8vw, 18px);
+  font-weight: 700;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .result-heading .result-class {
