@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Result</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <main class="card home-card">
+    <header class="home-branding">
+      <div class="home-brand">
+        <img class="home-logo" src="/static/logo.jpeg" alt="Glorious Coaching Centre logo" />
+        <span class="home-estd">Estd. 2011</span>
+      </div>
+      <div class="home-brand-text">
+        <h1>GLORIOUS COACHING CENTRE</h1>
+        <p>ARANDA, HASANPURA</p>
+      </div>
+    </header>
+
+    <hr class="home-divider" />
+
+    <h2 class="home-form-title">Check Your Result</h2>
+    <p class="form-intro">Enter your name and roll number to view your result.</p>
+
+    <form id="searchForm">
+      <label for="studentClass">Class</label>
+      <select id="studentClass" name="class" required>
+        <option value="" selected disabled>Select class</option>
+        <option value="1">Class 1</option>
+        <option value="2">Class 2</option>
+        <option value="3">Class 3</option>
+        <option value="4">Class 4</option>
+        <option value="5">Class 5</option>
+        <option value="6">Class 6</option>
+        <option value="7">Class 7</option>
+        <option value="8">Class 8</option>
+        <option value="9">Class 9</option>
+        <option value="10">Class 10</option>
+        <option value="11">Class 11</option>
+        <option value="12">Class 12</option>
+      </select>
+
+      <label for="name">Student name</label>
+      <input type="text" id="name" name="name" placeholder="Student name" required />
+
+      <label for="roll">Roll number</label>
+      <input type="text" id="roll" name="roll" placeholder="Roll number" required />
+
+      <button id="searchBtn" type="submit">View result</button>
+    </form>
+
+    <p id="message" class="message" role="status" aria-live="polite"></p>
+    <a class="teacher-link" href="/teacher">Teacher Login</a>
+  </main>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

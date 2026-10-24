@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teacher Dashboard | Glorious Coaching Centre</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="teacher-page">
+  <main class="card teacher-card">
+    <header class="home-branding teacher-branding">
+      <div class="home-brand">
+        <img class="home-logo" src="/static/logo.jpeg" alt="Glorious Coaching Centre logo" />
+        <span class="home-estd">Estd. 2011</span>
+      </div>
+      <div class="home-brand-text">
+        <h1>GLORIOUS COACHING CENTRE</h1>
+        <p>ARANDA, HASANPURA</p>
+      </div>
+    </header>
+
+    <hr class="home-divider" />
+    <h2 class="teacher-title">TEACHER DASHBOARD</h2>
+    <p class="teacher-welcome">Your students, all in one place.</p>
+
+    <form id="teacherLogin" class="teacher-login">
+      <label for="teacherName">Teacher name</label>
+      <select id="teacherName" name="teacherName" autocomplete="name" required>
+        <option value="" selected disabled>Select your name</option>
+        <option value="Waseem Akram">Waseem Akram</option>
+        <option value="Md Naseem">Md Naseem</option>
+        <option value="Md Meraj">Md Meraj</option>
+        <option value="Tabrej Alam">Tabrej Alam</option>
+        <option value="Md Arif">Md Arif</option>
+        <option value="Md Reyaj">Md Reyaj</option>
+        <option value="Nisha Kumari">Nisha Kumari</option>
+        <option value="Nargis Bano">Nargis Bano</option>
+      </select>
+
+      <label for="teacherPassword">Teacher password</label>
+      <input id="teacherPassword" name="password" type="password" placeholder="Enter shared password" autocomplete="current-password" required />
+
+      <button id="teacherLoginButton" type="submit">View all student data</button>
+      <p id="teacherMessage" class="message" role="status" aria-live="polite"></p>
+    </form>
+
+    <section id="teacherDashboard" class="teacher-dashboard" hidden>
+      <div class="teacher-actions">
+        <p id="teacherGreeting"></p>
+        <button id="teacherLogout" type="button">Log out</button>
+      </div>
+      <p id="studentCount" class="teacher-note"></p>
+      <section class="teacher-top-results" aria-labelledby="teacherTopTitle">
+        <h2 id="teacherTopTitle">TOP 3 STUDENTS</h2>
+        <div class="teacher-table-wrap">
+          <table class="result-table teacher-table teacher-top-table">
+            <thead>
+              <tr>
+                <th scope="col">Rank</th>
+                <th scope="col">Class</th>
+                <th scope="col">Roll No.</th>
+                <th scope="col">Student Name</th>
+                <th scope="col">Obtained Marks</th>
+              </tr>
+            </thead>
+            <tbody id="teacherTopRows"></tbody>
+          </table>
+        </div>
+        <p id="teacherTopEmpty" class="teacher-note" hidden>No marked results are available yet.</p>
+      </section>
+
+      <h2 class="teacher-records-title">ALL STUDENT RECORDS</h2>
+      <div class="teacher-table-wrap">
+        <table class="result-table teacher-table">
+          <thead>
+            <tr>
+              <th scope="col">Class</th>
+              <th scope="col">Roll No.</th>
+              <th scope="col">Student Name</th>
+              <th scope="col">Total Marks</th>
+              <th scope="col">Obtained Marks</th>
+            </tr>
+          </thead>
+          <tbody id="teacherStudentRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <a class="teacher-back" href="/">← Back to student result search</a>
+  </main>
+  <script src="/static/teacher.js"></script>
+</body>
+</html>

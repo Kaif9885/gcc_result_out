@@ -1,0 +1,25 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and local secrets
+.env
+.env.*
+!.env.example
+
+# Local student database and SQLite sidecar files
+students.db
+students.db-journal
+students.db-shm
+students.db-wal
+
+# macOS and editor files
+.DS_Store
+.vscode/
+.idea/
