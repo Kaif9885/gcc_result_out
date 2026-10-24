@@ -7,6 +7,7 @@ const teacherTopRows = document.getElementById("teacherTopRows");
 const teacherTopEmpty = document.getElementById("teacherTopEmpty");
 const teacherGreeting = document.getElementById("teacherGreeting");
 const studentCount = document.getElementById("studentCount");
+const teacherRecordsTitle = document.getElementById("teacherRecordsTitle");
 
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -22,6 +23,7 @@ loginForm.addEventListener("submit", async (event) => {
       body: JSON.stringify({
         teacher_name: document.getElementById("teacherName").value.trim(),
         password: document.getElementById("teacherPassword").value,
+        student_class: Number(document.getElementById("teacherClass").value),
       }),
     });
 
@@ -65,16 +67,19 @@ loginForm.addEventListener("submit", async (event) => {
     }
 
     teacherTopEmpty.hidden = payload.top_students.length > 0;
-    teacherGreeting.textContent = `Welcome, ${payload.teacher_name} · All student records`;
+    teacherGreeting.textContent = `Welcome, ${payload.teacher_name} · Class ${payload.student_class}`;
     studentCount.textContent = `${payload.students.length} student record(s)`;
+    document.getElementById("teacherTopTitle").textContent = `TOP 3 · CLASS ${payload.student_class}`;
+    teacherRecordsTitle.textContent = `CLASS ${payload.student_class} · ALL STUDENT RECORDS`;
     loginForm.hidden = true;
     teacherDashboard.hidden = false;
+    document.body.classList.add("teacher-page-dashboard");
   } catch (error) {
     teacherMessage.textContent = error.message || "Could not load student data. Please try again.";
     teacherMessage.className = "message error";
   } finally {
     loginButton.disabled = false;
-    loginButton.textContent = "View all student data";
+    loginButton.textContent = "View selected class records";
   }
 });
 
@@ -84,5 +89,6 @@ document.getElementById("teacherLogout").addEventListener("click", () => {
   teacherDashboard.hidden = true;
   loginForm.reset();
   loginForm.hidden = false;
+  document.body.classList.remove("teacher-page-dashboard");
   teacherMessage.textContent = "";
 });

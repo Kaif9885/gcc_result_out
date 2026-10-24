@@ -161,13 +161,17 @@ button:disabled { cursor: wait; opacity: 0.7; }
 .teacher-link:hover { text-decoration: underline; }
 
 .teacher-page {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   min-height: 100vh;
   background: #f3f4f6;
   padding: clamp(12px, 4vw, 32px) clamp(10px, 3vw, 24px);
   overflow-x: hidden;
 }
+
+.teacher-page.teacher-page-dashboard { align-items: flex-start; }
 
 .teacher-card {
   width: 100%;
@@ -284,6 +288,8 @@ button:disabled { cursor: wait; opacity: 0.7; }
 .teacher-back:hover { text-decoration: underline; }
 
 @media (max-width: 620px) {
+  .teacher-page { align-items: center; }
+  .teacher-page.teacher-page-dashboard { align-items: flex-start; }
   .teacher-card { padding: 18px; }
   .teacher-branding { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .teacher-card .home-divider { margin: 18px 0; }

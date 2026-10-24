@@ -37,10 +37,27 @@
         <option value="Nargis Bano">Nargis Bano</option>
       </select>
 
+      <label for="teacherClass">Class records to view</label>
+      <select id="teacherClass" name="class" required>
+        <option value="" selected disabled>Select class</option>
+        <option value="1">Class 1</option>
+        <option value="2">Class 2</option>
+        <option value="3">Class 3</option>
+        <option value="4">Class 4</option>
+        <option value="5">Class 5</option>
+        <option value="6">Class 6</option>
+        <option value="7">Class 7</option>
+        <option value="8">Class 8</option>
+        <option value="9">Class 9</option>
+        <option value="10">Class 10</option>
+        <option value="11">Class 11</option>
+        <option value="12">Class 12</option>
+      </select>
+
       <label for="teacherPassword">Teacher password</label>
       <input id="teacherPassword" name="password" type="password" placeholder="Enter shared password" autocomplete="current-password" required />
 
-      <button id="teacherLoginButton" type="submit">View all student data</button>
+      <button id="teacherLoginButton" type="submit">View selected class records</button>
       <p id="teacherMessage" class="message" role="status" aria-live="polite"></p>
     </form>
 
@@ -69,7 +86,7 @@
         <p id="teacherTopEmpty" class="teacher-note" hidden>No marked results are available yet.</p>
       </section>
 
-      <h2 class="teacher-records-title">ALL STUDENT RECORDS</h2>
+      <h2 id="teacherRecordsTitle" class="teacher-records-title">ALL STUDENT RECORDS</h2>
       <div class="teacher-table-wrap">
         <table class="result-table teacher-table">
           <thead>

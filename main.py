@@ -15,6 +15,7 @@ TEACHER_PASSWORD = os.getenv("TEACHER_PASSWORD", "786")
 class TeacherAccess(BaseModel):
     teacher_name: str
     password: str
+    student_class: int
 
 
 def get_connection():
@@ -82,6 +83,8 @@ def get_teacher_students(access: TeacherAccess):
     teacher_name = access.teacher_name.strip()
     if not teacher_name:
         raise HTTPException(status_code=422, detail="Teacher name is required")
+    if not 1 <= access.student_class <= 12:
+        raise HTTPException(status_code=422, detail="Select a valid class")
     if access.password != TEACHER_PASSWORD:
         raise HTTPException(status_code=401, detail="Incorrect password")
 
@@ -91,23 +94,27 @@ def get_teacher_students(access: TeacherAccess):
             """
             SELECT name, roll, student_class, total_marks, marks
             FROM students
-            ORDER BY student_class, name COLLATE NOCASE, roll
-            """
+            WHERE student_class = ?
+            ORDER BY CAST(roll AS INTEGER), roll COLLATE NOCASE
+            """,
+            (access.student_class,),
         ).fetchall()
         top_rows = conn.execute(
             """
             SELECT name, roll, student_class, total_marks, marks
             FROM students
-            WHERE marks IS NOT NULL
+            WHERE student_class = ? AND marks IS NOT NULL
             ORDER BY marks DESC, student_class, name COLLATE NOCASE, roll
             LIMIT 3
-            """
+            """,
+            (access.student_class,),
         ).fetchall()
     finally:
         conn.close()
 
     return {
         "teacher_name": teacher_name,
+        "student_class": access.student_class,
         "students": [dict(row) for row in rows],
         "top_students": [dict(row) for row in top_rows],
     }
