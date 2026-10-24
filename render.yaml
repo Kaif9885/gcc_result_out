@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: glorious-coaching-results
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python static/create_db.py
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: TEACHER_PASSWORD
+        sync: false

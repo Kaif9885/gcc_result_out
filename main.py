@@ -12,6 +12,11 @@ DB_PATH = PROJECT_DIR / "students.db"
 TEACHER_PASSWORD = os.getenv("TEACHER_PASSWORD", "786")
 
 
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
+
 class TeacherAccess(BaseModel):
     teacher_name: str
     password: str
