@@ -44,6 +44,12 @@ def get_connection():
     return conn
 
 
+def execute_query(conn, query, params=()):
+    if DATABASE_URL:
+        query = query.replace("?", "%s").replace("COLLATE NOCASE", 'COLLATE "C"')
+    return conn.execute(query, params)
+
+
 @app.get("/api/student")
 def get_student(
     name: str = Query(...),
@@ -56,7 +62,7 @@ def get_student(
 ):
     conn = get_connection()
     try:
-        row = conn.execute(
+        row = execute_query(conn,
             """
             SELECT name, roll, student_class, total_marks, marks,
                 board, subject, chapter, class_section
@@ -88,7 +94,7 @@ def get_top_students(
 ):
     conn = get_connection()
     try:
-        rows = conn.execute(
+        rows = execute_query(conn,
             """
             SELECT name, roll, total_marks, marks, position
             FROM (
@@ -138,7 +144,7 @@ def get_teacher_students(access: TeacherAccess):
 
     conn = get_connection()
     try:
-        rows = conn.execute(
+        rows = execute_query(conn,
             """
             SELECT name, roll, student_class, total_marks, marks
             FROM students
@@ -148,7 +154,7 @@ def get_teacher_students(access: TeacherAccess):
             """,
             (access.student_class, class_section, access.board, access.subject, access.chapter),
         ).fetchall()
-        top_rows = conn.execute(
+        top_rows = execute_query(conn,
             """
             SELECT name, roll, student_class, total_marks, marks, position
             FROM (
