@@ -11,7 +11,7 @@ env/
 # Environment variables and local secrets
 .env
 .env.*
-!.env.example
+.env.example
 
 # Local student database and SQLite sidecar files
 students.db

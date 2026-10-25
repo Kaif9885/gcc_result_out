@@ -1,8 +1,42 @@
 import sqlite3
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(PROJECT_DIR / ".env")
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+POSTGRES_CREATE_TABLE = """
+    CREATE TABLE IF NOT EXISTS students (
+        id BIGSERIAL PRIMARY KEY,
+        name TEXT NOT NULL,
+        roll TEXT NOT NULL,
+        total_marks INTEGER NOT NULL,
+        marks INTEGER,
+        student_class INTEGER NOT NULL DEFAULT 1
+            CHECK (student_class BETWEEN 1 AND 12),
+        board TEXT NOT NULL,
+        subject TEXT NOT NULL,
+        chapter TEXT NOT NULL,
+        class_section TEXT NOT NULL DEFAULT ''
+    )
+"""
+
+if DATABASE_URL:
+    import psycopg
+
+    with psycopg.connect(DATABASE_URL) as conn:
+        conn.execute(POSTGRES_CREATE_TABLE)
+        conn.execute(
+            """
+            CREATE UNIQUE INDEX IF NOT EXISTS students_result_identity
+            ON students (student_class, class_section, board, subject, chapter, roll)
+            """
+        )
+    print("Supabase PostgreSQL schema ready")
+    raise SystemExit(0)
+
 DB_DIRECTORY = Path(os.getenv("RENDER_DISK_PATH", PROJECT_DIR))
 DB_DIRECTORY.mkdir(parents=True, exist_ok=True)
 DB_PATH = DB_DIRECTORY / "students.db"

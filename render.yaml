@@ -5,14 +5,10 @@ services:
     buildCommand: pip install -r requirements.txt
     startCommand: python static/create_db.py && uvicorn main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
-    disk:
-      name: student-results-data
-      mountPath: /var/data
-      sizeGB: 1
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.8
-      - key: RENDER_DISK_PATH
-        value: /var/data
+      - key: DATABASE_URL
+        sync: false
       - key: TEACHER_PASSWORD
         sync: false

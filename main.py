@@ -5,11 +5,14 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from dotenv import load_dotenv
 
-app = FastAPI()
 PROJECT_DIR = Path(__file__).resolve().parent
+load_dotenv(PROJECT_DIR / ".env")
+app = FastAPI()
 DB_DIRECTORY = Path(os.getenv("RENDER_DISK_PATH", PROJECT_DIR))
 DB_PATH = DB_DIRECTORY / "students.db"
+DATABASE_URL = os.getenv("DATABASE_URL")
 TEACHER_PASSWORD = os.getenv("TEACHER_PASSWORD", "786")
 
 
@@ -29,6 +32,12 @@ class TeacherAccess(BaseModel):
 
 
 def get_connection():
+    if DATABASE_URL:
+        import psycopg
+        from psycopg.rows import dict_row
+
+        return psycopg.connect(DATABASE_URL, row_factory=dict_row)
+
     # read-only mode: the app can never modify the database
     conn = sqlite3.connect(f"{DB_PATH.as_uri()}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
