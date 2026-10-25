@@ -8,7 +8,8 @@ from pydantic import BaseModel
 
 app = FastAPI()
 PROJECT_DIR = Path(__file__).resolve().parent
-DB_PATH = PROJECT_DIR / "students.db"
+DB_DIRECTORY = Path(os.getenv("RENDER_DISK_PATH", PROJECT_DIR))
+DB_PATH = DB_DIRECTORY / "students.db"
 TEACHER_PASSWORD = os.getenv("TEACHER_PASSWORD", "786")
 
 

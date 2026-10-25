@@ -1,7 +1,11 @@
 import sqlite3
+import os
 from pathlib import Path
 
-DB_PATH = Path(__file__).resolve().parent.parent / "students.db"
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+DB_DIRECTORY = Path(os.getenv("RENDER_DISK_PATH", PROJECT_DIR))
+DB_DIRECTORY.mkdir(parents=True, exist_ok=True)
+DB_PATH = DB_DIRECTORY / "students.db"
 
 CREATE_STUDENTS_TABLE = """
     CREATE TABLE IF NOT EXISTS {table_name} (
